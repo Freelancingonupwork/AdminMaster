@@ -144,12 +144,7 @@ class UserController extends Controller
                 return redirect()->back()->withInput()->withErrors($validator->getMessageBag());
             }
             $input = $request->all();
-            //Check if User already exists
-            // $usersCount = User::where('email', $input['email'])->count();
-
-            // if ($usersCount > 0) {
-            //     return redirect()->back()->with('error', "Email already exists.");
-            // } else {
+            
                 if (!isset($input['name']) || empty($input['name'])) {
                     $input['name'] = $user->name;
                 }
@@ -180,7 +175,6 @@ class UserController extends Controller
                     $user = User::where(['id' => $user->id])->first()->toArray();
                     return redirect()->back()->with('success', 'Profile Updated Successfully !!!');
                 }
-            // }
         }
         return view('front.auth.profile');
     }

@@ -20,17 +20,6 @@ class StripeController extends Controller
     {
 
         $session = Session::get('cartData');
-        // echo "<pre>"; print_r($session); die;
-
-        // $subscriptionData = Subscription::where(['user_id' =>Auth::user()->id])->first();
-
-        // foreach($session as $cartData){
-        //     $allCartData = Cart::where(['payment_status' => 1, 'user_id' => Auth::user()->id, 'product_id' => $cartData['product_id']])->get()->toArray();
-        //     if($cartData['product']['subscription_Type'] == 1 && count($allCartData) > 0){
-
-        //     }
-        // }
-
         $grandTotal = Session::get('grandTotal');
         $grandTotal = $grandTotal[0]->grandTotal;
 
@@ -56,32 +45,6 @@ class StripeController extends Controller
             'mode' => 'payment',
             'success_url' => $redirect_url,
         ]);
-
-        // foreach ($session as $cartData) {
-        //     $vendorStripeDetails = StripeAccountDetails::where(['user_id' => $cartData['product']['added_by']])->first();
-        //     $amount = ($cartData['product']['product_price'] - 200);
-        //     $stripeData = $stripe->checkout->sessions->create([
-        //         'mode' => 'payment',
-        //         'customer_email' => Auth::user()->email,
-        //         'line_items' => [
-        //             [
-        //                 'price_data' => [
-        //                     'product_data' => [
-        //                         'name' => Auth::user()->name,
-        //                     ],
-        //                     'unit_amount' => $cartData['product_total'],
-        //                     'currency' => 'inr',
-        //                 ],
-        //                 'quantity' => 1,
-        //             ]
-        //         ],
-        //         'payment_intent_data' => [
-        //             'application_fee_amount' => 200,
-        //             'transfer_data' => ['destination' => $vendorStripeDetails['stripe_accountId']],
-        //         ],
-        //         'success_url' => $redirect_url,
-        //     ]);
-        // }
 
         return redirect($stripeData['url']);
     }

@@ -52,9 +52,7 @@ class CategoryController extends Controller
             $category->save();
             return redirect('/admin/category-index')->with('success','Category Inserted Successfully !!!');
         }
-        // echo "test"; die;
         $levels = Category::with('subCategory')->where(['parent_id'=> 0])->get();
-        // echo "<pre>"; print_r($levels); die;
         return view('admin.category.create')->with(compact('levels'));
     }
 
@@ -62,7 +60,6 @@ class CategoryController extends Controller
         if($request->isMethod('post')){
             $data = $request->all();
 
-            // echo "<pre>"; print_r($data); die;
             $validation = [
                 'category_name' => ['required','string', 'nullable', 'max:255'],
             ];
